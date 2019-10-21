@@ -25,7 +25,7 @@ services:
       - pgsql
     depends_on:
       - pgsql
-    container_name: task_manager_api_php_fpm
+    container_name: openapi_core_php_fpm
 
   pgsql:
     build:
