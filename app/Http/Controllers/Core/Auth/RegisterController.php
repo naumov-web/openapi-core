@@ -37,7 +37,12 @@ class RegisterController extends AbstractCoreController
      */
     public function register(RegisterRequest $request) : JsonResponse
     {
-        $this->users_service->register($request->all());
+        $this->users_service->register($request->only(
+            [
+                'email',
+                'password'
+            ]
+        ));
 
         return response()->json([
             'success' => true
