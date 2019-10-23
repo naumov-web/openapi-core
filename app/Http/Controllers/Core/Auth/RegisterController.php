@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Core\Auth;
 
 use App\Http\Controllers\Core\AbstractCoreController;
 use App\Http\Requests\Core\Auth\RegisterRequest;
