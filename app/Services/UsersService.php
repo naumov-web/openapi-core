@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\AbstractRepository;
 use App\Repositories\OwnersRepository;
 use App\Repositories\UsersRepository;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class UsersService
@@ -53,6 +54,25 @@ class UsersService extends AbstractEntityService
      */
     public function register(array $data) : User
     {
+        /**
+         * @var User $user
+         */
+        $user = $this->repository->store(
+            array_merge(
+                $data,
+                [
+                    'password' => Hash::make($data['password'])
+                ]
+            )
+        );
 
+        $this->owners_repository->store(
+            [
+                'owner_id' => $user->id,
+                'owner_type' => get_class($user)
+            ]
+        );
+
+        return $user;
     }
 }

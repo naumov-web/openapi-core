@@ -27,7 +27,9 @@ abstract class AbstractEntityService
      */
     public function store(array $data) : Model
     {
+        $repository = $this->getRepository();
 
+        return $repository->store($data);
     }
 
 }
