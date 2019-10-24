@@ -1,0 +1,52 @@
+swagger: "2.0"
+info:
+  title: "OpenAPI constructor"
+  description: "Docs for OpenAPI"
+  version: "1.0.0"
+schemes:
+  - "http"
+host: api.open-api.ru
+basePath: /api
+
+paths:
+  /core/auth/register:
+    post:
+      tags:
+        - "user"
+        - "register"
+      summary: "Register new user"
+      description: ""
+      produces:
+        - "application/json"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: "CoreAuthRegisterRequestBody"
+          in: "body"
+          description: "Body of request for register new user"
+          required: true
+          schema:
+            $ref: "#/definitions/CoreAuthRegisterRequestModel"
+      responses:
+        200:
+          description: "Successful operation"
+        422:
+          description: "Validation error"
+        500:
+          description: "Internal server error"
+
+definitions:
+
+  CoreAuthRegisterRequestModel:
+    type: "object"
+    required:
+      - "email"
+      - "password"
+      - "password_confirmation"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+      password_confirmation:
+        type: "string"
