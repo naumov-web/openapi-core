@@ -9,6 +9,34 @@ host: api.open-api.ru
 basePath: /api
 
 paths:
+  /core/auth/login:
+    post:
+      tags:
+        - "user"
+        - "login"
+      summary: "Register new user"
+      description: ""
+      produces:
+        - "application/json"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: "CoreAuthLoginRequestBody"
+          in: "body"
+          description: "Body of request for register new user"
+          required: true
+          schema:
+            $ref: "#/definitions/CoreAuthLoginRequestModel"
+      responses:
+        200:
+          description: "Successful operation"
+        401:
+          description: "Incorrect login data"
+        422:
+          description: "Validation error"
+        500:
+          description: "Internal server error"
+
   /core/auth/register:
     post:
       tags:
@@ -36,6 +64,17 @@ paths:
           description: "Internal server error"
 
 definitions:
+
+  CoreAuthLoginRequestModel:
+    type: "object"
+    required:
+      - "email"
+      - "password"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
 
   CoreAuthRegisterRequestModel:
     type: "object"
