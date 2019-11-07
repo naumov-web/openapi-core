@@ -7,6 +7,7 @@ use App\Repositories\AbstractRepository;
 use App\Repositories\OwnersRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * Class UsersService
@@ -74,5 +75,16 @@ class UsersService extends AbstractEntityService
         );
 
         return $user;
+    }
+
+    /**
+     * Get auth token by model
+     *
+     * @param User $user
+     * @return string
+     */
+    public function login(User $user) : string
+    {
+        return JWTAuth::fromUser($user);
     }
 }

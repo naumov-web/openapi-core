@@ -23,4 +23,19 @@ class RegisterRequest extends BaseApiRequest
             'password' => 'required|confirmed|string|min:6',
         ];
     }
+
+    /**
+     * Get error messages
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return array_merge(
+            parent::messages(),
+            [
+                'email.unique' => config('error_messages.email_unique')
+            ]
+        );
+    }
 }

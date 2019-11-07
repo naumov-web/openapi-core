@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User
@@ -12,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int $id
  * @property string $email
  */
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -48,5 +49,21 @@ class User extends Authenticatable
     public function abstract_owner()
     {
         return $this->morphOne(Owner::class, 'owner');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
