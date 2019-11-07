@@ -30,6 +30,8 @@ paths:
       responses:
         200:
           description: "Successful operation"
+          schema:
+            $ref: "#/definitions/TokenModel"
         401:
           description: "Incorrect login data"
         422:
@@ -58,12 +60,22 @@ paths:
       responses:
         200:
           description: "Successful operation"
+          schema:
+            $ref: "#/definitions/TokenModel"
         422:
           description: "Validation error"
         500:
           description: "Internal server error"
 
 definitions:
+
+  TokenModel:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      token:
+        type: "string"
 
   CoreAuthLoginRequestModel:
     type: "object"
