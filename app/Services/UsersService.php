@@ -78,6 +78,17 @@ class UsersService extends AbstractEntityService
     }
 
     /**
+     * Get token by email and password
+     *
+     * @param array $data
+     * @return string|null
+     */
+    public function attempt(array $data) : ?string
+    {
+        return JWTAuth::attempt($data);
+    }
+
+    /**
      * Get auth token by model
      *
      * @param User $user
