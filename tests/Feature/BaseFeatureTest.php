@@ -14,6 +14,16 @@ abstract class BaseFeatureTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * Get primary user email
+     *
+     * @return mixed
+     */
+    protected function getPrimaryUserEmail()
+    {
+        return config('tests.users')[0]['email'];
+    }
+
+    /**
      * Create account for testing
      *
      * @return void

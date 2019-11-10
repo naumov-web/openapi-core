@@ -18,4 +18,15 @@ class UsersRepository extends AbstractRepository
     {
         return User::class;
     }
+
+    /**
+     * Get detailed user
+     *
+     * @param User $model
+     * @return User
+     */
+    public function getDetailedUser(User $model) : User
+    {
+        return $model;
+    }
 }

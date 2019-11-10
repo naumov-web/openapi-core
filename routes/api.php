@@ -9,7 +9,7 @@ Route::prefix('core')->group(function() {
         Route::post('/register', 'Core\Auth\RegisterController@register')->name('core.auth.register');
     });
 
-    Route::prefix('account')->group(function() {
+    Route::prefix('account')->middleware('auth.jwt')->group(function() {
         Route::get('/user', 'Core\Account\UserController@show')->name('core.account.user.show');
         Route::put('/user', 'Core\Account\UserController@update')->name('core.account.user.update');
     });

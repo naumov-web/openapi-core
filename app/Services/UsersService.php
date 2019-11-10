@@ -48,6 +48,17 @@ class UsersService extends AbstractEntityService
     }
 
     /**
+     * Get detailed user
+     *
+     * @param User $model
+     * @return User
+     */
+    public function getDetailedUser(User $model) : User
+    {
+        return $this->repository->getDetailedUser($model);
+    }
+
+    /**
      * Register new user
      *
      * @param array $data

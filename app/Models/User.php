@@ -18,6 +18,12 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     /**
+     * Token length
+     * @var int
+     */
+    public const TOKEN_LENGTH = 80;
+
+    /**
      * Guarded fields list
      * @var array
      */
