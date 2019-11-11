@@ -32,7 +32,6 @@ class GetUserTest extends BaseAccountTest
     public function testSuccess() : void
     {
         $this->createTestAccount();
-
         $this->setSignedUser();
 
         $this->json('GET', route('core.account.user.show'))

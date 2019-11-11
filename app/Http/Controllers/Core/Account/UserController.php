@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Core\Account;
 
+use App\Http\Requests\Core\Account\User\UpdateUserRequest;
 use App\Http\Resources\Account\User\UserResource;
+use App\Models\User;
 use App\Services\UsersService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class UserController
@@ -27,6 +31,11 @@ class UserController extends AbstractAccountController
         $this->users_service = $users_service;
     }
 
+    /**
+     * Get user info
+     *
+     * @return UserResource
+     */
     public function show() : UserResource
     {
         return new UserResource(
@@ -34,6 +43,21 @@ class UserController extends AbstractAccountController
                 $this->getSignedUser()
             )
         );
+    }
+
+    /**
+     * Update user info
+     *
+     * @param UpdateUserRequest $request
+     * @return JsonResponse
+     */
+    public function update(UpdateUserRequest $request) : JsonResponse
+    {
+        $this->users_service->update(auth()->user(), $request->only(['email', 'password']));
+
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
 }

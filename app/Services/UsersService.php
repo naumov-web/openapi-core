@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\AbstractRepository;
 use App\Repositories\OwnersRepository;
 use App\Repositories\UsersRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -86,6 +87,24 @@ class UsersService extends AbstractEntityService
         );
 
         return $user;
+    }
+
+    /**
+     * Update user info
+     *
+     * @param User $model
+     * @param array $data
+     * @return Model
+     */
+    public function update(User $model, array $data) : Model
+    {
+        $user_data = $data;
+
+        if (isset($data['password'])) {
+            $user_data['password'] = Hash::make($data['password']);
+        }
+
+        return $this->repository->update($model, $user_data);
     }
 
     /**

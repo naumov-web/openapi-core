@@ -38,4 +38,19 @@ abstract class AbstractRepository
         return $model;
     }
 
+    /**
+     * Update model
+     *
+     * @param Model $model
+     * @param array $data
+     * @return Model
+     */
+    public function update(Model $model, array $data) : Model
+    {
+        $model->fill($data);
+        $model->save();
+
+        return $model;
+    }
+
 }
