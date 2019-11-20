@@ -7,6 +7,7 @@ use App\Http\Requests\Core\Auth\LoginRequest;
 use App\Services\UsersService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class LoginController
@@ -35,13 +36,18 @@ class LoginController extends AbstractCoreController
      *
      * @param LoginRequest $request
      * @return JsonResponse
+     * @throws ValidationException
      */
     public function login(LoginRequest $request) : JsonResponse
     {
         $token = $this->users_service->attempt($request->only(['email', 'password']));
 
         if (!$token) {
-            abort(Response::HTTP_UNAUTHORIZED);
+            throw ValidationException::withMessages(
+                [
+                    'email' => config('error_messages.incorrect_email_or_password')
+                ]
+            );
         }
 
         return response()->json([
