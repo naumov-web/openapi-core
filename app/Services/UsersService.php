@@ -7,6 +7,7 @@ use App\Repositories\AbstractRepository;
 use App\Repositories\OwnersRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -98,7 +99,7 @@ class UsersService extends AbstractEntityService
      */
     public function update(User $model, array $data) : Model
     {
-        $user_data = $data;
+        $user_data = Arr::only($data, ['email']);
 
         if (isset($data['password'])) {
             $user_data['password'] = Hash::make($data['password']);
