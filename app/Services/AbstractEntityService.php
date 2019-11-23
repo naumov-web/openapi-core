@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class AbstractEntityService
  * @package App\Services
  */
-abstract class AbstractEntityService
+abstract class AbstractEntityService extends AbstractService
 {
 
     /**

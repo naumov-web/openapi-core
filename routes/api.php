@@ -12,6 +12,14 @@ Route::prefix('core')->group(function() {
     Route::prefix('account')->middleware('auth.jwt')->group(function() {
         Route::get('/user', 'Core\Account\UserController@show')->name('core.account.user.show');
         Route::put('/user', 'Core\Account\UserController@update')->name('core.account.user.update');
+
+        Route::prefix('projects')->group(function(){
+
+        });
+    });
+
+    Route::prefix('handbooks')->group(function() {
+        Route::get('/public/all', 'Core\Handbooks\PublicController@all')->name('core.handbooks.public.all.show');
     });
 });
 

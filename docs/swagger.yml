@@ -111,7 +111,39 @@ paths:
         500:
           description: "Internal server error"
 
+  /core/handbooks/public/all:
+    get:
+      tags:
+        - "handbooks"
+      summary: "Get all handbooks"
+      description: ""
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/CoreHandbookPublicAllModel"
+        500:
+          description: "Internal server error"
+
 definitions:
+
+  CoreDefaultHandbookModel:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+
+  CoreHandbookPublicAllModel:
+    type: "object"
+    properties:
+      formats:
+        type: "array"
+        items:
+          $ref: "#/definitions/CoreDefaultHandbookModel"
 
   CoreAccountUpdateUserRequestModel:
     type: "object"
