@@ -31,7 +31,7 @@ class LoginTest extends BaseFeatureTest
 
         $data['password'] = config('tests.users')[0]['password'] . '_';
         $this->json('POST', route('core.auth.login'), $data)
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /**
