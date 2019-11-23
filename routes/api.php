@@ -14,7 +14,7 @@ Route::prefix('core')->group(function() {
         Route::put('/user', 'Core\Account\UserController@update')->name('core.account.user.update');
 
         Route::prefix('projects')->group(function(){
-
+            Route::post('', 'Core\Account\ProjectsController@create')->name('core.account.projects.create');
         });
     });
 
