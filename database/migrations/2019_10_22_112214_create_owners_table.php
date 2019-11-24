@@ -21,6 +21,7 @@ class CreateOwnersTable extends Migration
             $table->string('owner_type');
             $table->unsignedBigInteger('owner_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

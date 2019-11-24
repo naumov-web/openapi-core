@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('format_id');
             $table->string('key', 21);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('projects', function (Blueprint $table) {
