@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\ListItemsDTO;
 use App\Repositories\AbstractRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,15 @@ abstract class AbstractEntityService extends AbstractService
      * @return AbstractRepository
      */
     abstract protected function getRepository() : AbstractRepository;
+
+    /**
+     * @param array $data
+     * @return ListItemsDTO
+     */
+    public function index(array $data): ListItemsDTO
+    {
+        return $this->getRepository()->index($data);
+    }
 
     /**
      * Store new entity
