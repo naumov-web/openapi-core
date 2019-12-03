@@ -58,6 +58,22 @@ abstract class AbstractRepository
     }
 
     /**
+     * Apply default sorting
+     *
+     * @param Builder $query
+     * @param array $data
+     * @return Builder
+     */
+    protected function applyDefaultSorting(Builder $query, array $data): Builder
+    {
+        if (isset($data['sort_by']) && isset($data['sort_direction'])) {
+            $query->orderBy($data['sort_by'], $data['sort_direction']);
+        }
+
+        return $query;
+    }
+
+    /**
      * Get count and list of items
      *
      * @param array $data
@@ -75,6 +91,7 @@ abstract class AbstractRepository
         $count = $query->count();
 
         $query = $this->applyPagination($query, $data);
+        $query = $this->applyDefaultSorting($query, $data);
 
         return new ListItemsDTO($query->get(), $count);
     }

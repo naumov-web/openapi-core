@@ -67,7 +67,7 @@ class ProjectsService extends AbstractEntityService
      */
     public function create(Owner $owner, array $data): Model
     {
-        $full_key = sha1($data['name'] . $data['owner_id'] . microtime());
+        $full_key = sha1($data['name'] . $owner->id . microtime());
         $short_key = substr($full_key, 0, 10) . '-' . substr($full_key, 10, 10);
 
         return $this->store(
