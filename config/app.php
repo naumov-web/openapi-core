@@ -28,6 +28,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'entity_base_url_template' => env('ENTITY_BASE_URL_TEMPLATE', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

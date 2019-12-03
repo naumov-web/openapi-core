@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\DTO\ListItemsDTO;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
+use  Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class AbstractRepository
@@ -51,7 +51,7 @@ abstract class AbstractRepository
             $query->limit($data['limit']);
         }
         if (isset($data['offset'])) {
-            $query->limit($data['offset']);
+            $query->offset($data['offset']);
         }
 
         return $query;
@@ -71,6 +71,7 @@ abstract class AbstractRepository
          * @var Builder $query
          */
         $query = $model_class::query();
+        $query = $this->applyFilters($query, $data['filters'] ?? []);
         $count = $query->count();
 
         $query = $this->applyPagination($query, $data);

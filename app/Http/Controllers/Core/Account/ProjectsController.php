@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Core\Account;
 
 use App\Http\Requests\Core\Account\Projects\CreateProjectRequest;
+use App\Http\Requests\Core\Account\Projects\GetProjectsRequest;
+use App\Http\Resources\Account\ListResource;
+use App\Http\Resources\Account\Projects\ProjectsResource;
 use App\Services\ProjectsService;
 use Illuminate\Http\JsonResponse;
 
@@ -28,6 +31,24 @@ class ProjectsController extends AbstractAccountController
     }
 
     /**
+     * Get projects list
+     *
+     * @param GetProjectsRequest $request
+     * @return ListResource
+     */
+    public function index(GetProjectsRequest $request): ListResource
+    {
+        $owner = auth()->user()->abstract_owner;
+        $result = $this->service->list($owner, $request->all());
+
+        return new ListResource(
+            ProjectsResource::class,
+            $result->getModels(),
+            $result->getCount()
+        );
+    }
+
+    /**
      * Create new project
      *
      * @param CreateProjectRequest $request
@@ -38,12 +59,8 @@ class ProjectsController extends AbstractAccountController
         $owner = auth()->user()->abstract_owner;
 
         $this->service->create(
-            array_merge(
-                $request->all(),
-                [
-                    'owner_id' => $owner->id
-                ]
-            )
+            $owner,
+            $request->all()
         );
 
         return response()->json([
