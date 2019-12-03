@@ -139,11 +139,21 @@ paths:
         - in: "query"
           name: "limit"
           type: "integer"
+          required: true
           description: "Limit of items in response"
         - in: "query"
           name: "offset"
           type: "integer"
+          required: true
           description: "Offset of items in response"
+        - in: "query"
+          name: "sort_by"
+          type: "string"
+          description: "Sort by column"
+        - in: "query"
+          name: "sort_direction"
+          type: "string"
+          description: "Sort direction"
       responses:
         200:
           description: "Successful operation"
@@ -179,6 +189,32 @@ paths:
           description: "Unauthorized"
         422:
           description: "Validation error"
+        500:
+          description: "Internal server error"
+
+  /core/account/projects/{project}:
+    get:
+      tags:
+        - "projects"
+      summary: "Get detailed project info"
+      description: ""
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "project"
+          type: "integer"
+          required: true
+          description: "Id of project"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/CoreAccountProjectModel"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Access denied"
         500:
           description: "Internal server error"
 
