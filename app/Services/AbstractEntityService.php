@@ -30,6 +30,17 @@ abstract class AbstractEntityService extends AbstractService
     }
 
     /**
+     * Get detailed model info
+     *
+     * @param Model $model
+     * @return Model
+     */
+    public function show(Model $model): Model
+    {
+        return $this->getRepository()->show($model);
+    }
+
+    /**
      * Store new entity
      *
      * @param array $data

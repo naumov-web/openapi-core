@@ -97,6 +97,17 @@ abstract class AbstractRepository
     }
 
     /**
+     * Get detailed model info
+     *
+     * @param Model $model
+     * @return Model
+     */
+    public function show(Model $model): Model
+    {
+        return $model;
+    }
+
+    /**
      * Store new model to database
      *
      * @param array $data

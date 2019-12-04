@@ -15,9 +15,12 @@ Route::prefix('core')->group(function() {
 
         Route::prefix('projects')->group(function(){
             Route::get('', 'Core\Account\ProjectsController@index')->name('core.account.projects.index');
-            Route::get('/{project}', 'Core\Account\ProjectsController@show')->name('core.account.projects.show');
-
             Route::post('', 'Core\Account\ProjectsController@create')->name('core.account.projects.create');
+
+            Route::middleware('check.project-owner')->group(function(){
+                Route::get('/{project}', 'Core\Account\ProjectsController@show')
+                    ->name('core.account.projects.show');
+            });
         });
     });
 

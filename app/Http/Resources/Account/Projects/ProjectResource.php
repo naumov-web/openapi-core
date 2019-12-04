@@ -5,10 +5,10 @@ namespace App\Http\Resources\Account\Projects;
 use App\Http\Resources\Account\BaseAccountResource;
 
 /**
- * Class ProjectsResource
+ * Class ProjectResource
  * @package App\Http\Resources\Account\Projects
  */
-class ProjectsResource extends BaseAccountResource
+class ProjectResource extends BaseAccountResource
 {
 
     /**
