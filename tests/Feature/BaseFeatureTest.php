@@ -16,21 +16,23 @@ abstract class BaseFeatureTest extends TestCase
     /**
      * Get primary user email
      *
+     * @param int $index
      * @return mixed
      */
-    protected function getPrimaryUserEmail()
+    protected function getPrimaryUserEmail(int $index = 0)
     {
-        return config('tests.users')[0]['email'];
+        return config('tests.users')[$index]['email'];
     }
 
     /**
      * Create account for testing
      *
+     * @param int $index
      * @return void
      */
-    protected function prepareBeforeTests() : void
+    protected function prepareBeforeTests(int $index = 0) : void
     {
-        $user_data = config('tests.users')[0];
+        $user_data = config('tests.users')[$index];
 
         $this->json('POST', route('core.auth.register'), $user_data);
     }

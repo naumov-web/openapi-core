@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Core\Account;
 use App\Http\Requests\Core\Account\Projects\CreateProjectRequest;
 use App\Http\Requests\Core\Account\Projects\GetProjectsRequest;
 use App\Http\Resources\Account\ListResource;
+use App\Http\Resources\Account\Projects\ProjectDetailResource;
 use App\Http\Resources\Account\Projects\ProjectResource;
 use App\Models\Project;
 use App\Services\ProjectsService;
@@ -73,11 +74,11 @@ class ProjectsController extends AbstractAccountController
      * Get project detailed info
      *
      * @param Project $project
-     * @return ProjectResource
+     * @return ProjectDetailResource
      */
-    public function show(Project $project): ProjectResource
+    public function show(Project $project): ProjectDetailResource
     {
-        return new ProjectResource(
+        return new ProjectDetailResource(
             $this->service->show($project)
         );
     }

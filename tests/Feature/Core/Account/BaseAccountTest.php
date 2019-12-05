@@ -36,6 +36,16 @@ abstract class BaseAccountTest extends BaseFeatureTest
     }
 
     /**
+     * Reset signed user
+     *
+     * @return void
+     */
+    protected function resetSignedUser(): void
+    {
+        $this->signed_user = null;
+    }
+
+    /**
      * Execute json request
      *
      * @param string $method
