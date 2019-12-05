@@ -13,6 +13,7 @@ Route::prefix('core')->group(function() {
         Route::get('/user', 'Core\Account\UserController@show')->name('core.account.user.show');
         Route::put('/user', 'Core\Account\UserController@update')->name('core.account.user.update');
 
+        // Projects
         Route::prefix('projects')->group(function(){
             Route::get('', 'Core\Account\ProjectsController@index')->name('core.account.projects.index');
             Route::post('', 'Core\Account\ProjectsController@create')->name('core.account.projects.create');
@@ -20,6 +21,10 @@ Route::prefix('core')->group(function() {
             Route::middleware('check.project-owner')->group(function(){
                 Route::get('/{project}', 'Core\Account\ProjectsController@show')
                     ->name('core.account.projects.show');
+                Route::put('/{project}', 'Core\Account\ProjectsController@update')
+                    ->name('core.account.projects.update');
+                Route::delete('/{project}', 'Core\Account\ProjectsController@delete')
+                    ->name('core.account.projects.delete');
             });
         });
     });
