@@ -147,6 +147,18 @@ abstract class AbstractRepository
     }
 
     /**
+     * Delete model
+     *
+     * @param Model $model
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(Model $model): bool
+    {
+        return $model->delete();
+    }
+
+    /**
      * Get first model by simple filters
      *
      * @param array $filters

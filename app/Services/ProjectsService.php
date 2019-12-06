@@ -106,6 +106,18 @@ class ProjectsService extends AbstractEntityService
     }
 
     /**
+     * Delete project
+     *
+     * @param Project $model
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(Project $model): bool
+    {
+        return $this->deleteModel($model);
+    }
+
+    /**
      * Check is project exists for owner
      *
      * @param string $name

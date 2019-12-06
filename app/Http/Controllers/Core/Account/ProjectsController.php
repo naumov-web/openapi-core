@@ -72,7 +72,7 @@ class ProjectsController extends AbstractAccountController
     }
 
     /**
-     * Update request
+     * Update project
      *
      * @param Project $project
      * @param UpdateProjectRequest $request
@@ -84,6 +84,22 @@ class ProjectsController extends AbstractAccountController
             $project,
             $request->all()
         );
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    /**
+     * Delete project
+     *
+     * @param Project $project
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function delete(Project $project): JsonResponse
+    {
+        $this->service->delete($project);
 
         return response()->json([
             'success' => true

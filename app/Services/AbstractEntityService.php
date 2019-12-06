@@ -67,4 +67,18 @@ abstract class AbstractEntityService extends AbstractService
         return $repository->update($model, $data);
     }
 
+    /**
+     * Delete model
+     *
+     * @param Model $model
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteModel(Model $model): bool
+    {
+        $repository = $this->getRepository();
+
+        return $repository->delete($model);
+    }
+
 }
