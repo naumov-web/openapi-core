@@ -105,7 +105,7 @@ class UsersService extends AbstractEntityService
             $user_data['password'] = Hash::make($data['password']);
         }
 
-        return $this->repository->update($model, $user_data);
+        return $this->updateModel($model, $user_data);
     }
 
     /**

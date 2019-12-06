@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Core\Account;
 
 use App\Http\Requests\Core\Account\Projects\CreateProjectRequest;
 use App\Http\Requests\Core\Account\Projects\GetProjectsRequest;
+use App\Http\Requests\Core\Account\Projects\UpdateProjectRequest;
 use App\Http\Resources\Account\ListResource;
 use App\Http\Resources\Account\Projects\ProjectDetailResource;
 use App\Http\Resources\Account\Projects\ProjectResource;
@@ -71,6 +72,25 @@ class ProjectsController extends AbstractAccountController
     }
 
     /**
+     * Update request
+     *
+     * @param Project $project
+     * @param UpdateProjectRequest $request
+     * @return JsonResponse
+     */
+    public function update(Project $project, UpdateProjectRequest $request): JsonResponse
+    {
+        $this->service->update(
+            $project,
+            $request->all()
+        );
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    /**
      * Get project detailed info
      *
      * @param Project $project
@@ -79,7 +99,7 @@ class ProjectsController extends AbstractAccountController
     public function show(Project $project): ProjectDetailResource
     {
         return new ProjectDetailResource(
-            $this->service->show($project)
+            $this->service->showModel($project)
         );
     }
 

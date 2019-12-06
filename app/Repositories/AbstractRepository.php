@@ -33,6 +33,10 @@ abstract class AbstractRepository
             if (count($filter) == 2) {
                 $query->where($filter[0], $filter[1]);
             }
+
+            if (count($filter) == 3) {
+                $query->where($filter[0], $filter[1], $filter[2]);
+            }
         }
 
         return $query;

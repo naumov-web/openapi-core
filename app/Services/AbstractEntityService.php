@@ -24,7 +24,7 @@ abstract class AbstractEntityService extends AbstractService
      * @param array $data
      * @return ListItemsDTO
      */
-    public function index(array $data): ListItemsDTO
+    public function indexModels(array $data): ListItemsDTO
     {
         return $this->getRepository()->index($data);
     }
@@ -35,7 +35,7 @@ abstract class AbstractEntityService extends AbstractService
      * @param Model $model
      * @return Model
      */
-    public function show(Model $model): Model
+    public function showModel(Model $model): Model
     {
         return $this->getRepository()->show($model);
     }
@@ -46,11 +46,25 @@ abstract class AbstractEntityService extends AbstractService
      * @param array $data
      * @return Model
      */
-    public function store(array $data) : Model
+    public function storeModel(array $data) : Model
     {
         $repository = $this->getRepository();
 
         return $repository->store($data);
+    }
+
+    /**
+     * Update model
+     *
+     * @param Model $model
+     * @param array $data
+     * @return Model
+     */
+    public function updateModel(Model $model, array $data): Model
+    {
+        $repository = $this->getRepository();
+
+        return $repository->update($model, $data);
     }
 
 }

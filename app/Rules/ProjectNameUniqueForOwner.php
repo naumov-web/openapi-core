@@ -19,10 +19,18 @@ class ProjectNameUniqueForOwner implements Rule
     protected $service;
 
     /**
-     * Create a new rule instance.
+     * Except id
+     * @var null
      */
-    public function __construct()
+    protected $except_id = null;
+
+    /**
+     * Create a new rule instance.
+     * @param int|null $except_id
+     */
+    public function __construct(int $except_id = null)
     {
+        $this->except_id = $except_id;
         $this->service = new ProjectsService(new ProjectsRepository());
     }
 
@@ -40,7 +48,8 @@ class ProjectNameUniqueForOwner implements Rule
         return !(
             $this->service->isProjectExists(
                 $value,
-                $owner->id
+                $owner->id,
+                $this->except_id
             )
         );
     }
