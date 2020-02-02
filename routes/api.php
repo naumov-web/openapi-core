@@ -25,6 +25,12 @@ Route::prefix('core')->group(function() {
                     ->name('core.account.projects.update');
                 Route::delete('/{project}', 'Core\Account\ProjectsController@delete')
                     ->name('core.account.projects.delete');
+
+                // Project entities
+                Route::prefix('{project}/entities')->group(function(){
+                    Route::post('', 'Core\Account\ProjectEntitiesController@create')
+                        ->name('core.account.project-entities.create');
+                });
             });
         });
     });
