@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Core\Account\ProjectEntities;
 
 use App\Http\Requests\Core\Account\BaseAccountRequest;
+use App\Rules\EntityNameUniqueForProject;
 
 /**
  * Class CreateProjectEntityRequest
@@ -17,8 +18,10 @@ class CreateProjectEntityRequest extends BaseAccountRequest
      */
     public function rules() : array
     {
+        $project = $this->route('project');
+
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', new EntityNameUniqueForProject($project->id)],
             'description' => 'nullable|string'
         ];
     }

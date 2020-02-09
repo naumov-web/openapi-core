@@ -55,4 +55,34 @@ class ProjectEntitiesService extends AbstractEntityService
             )
         );
     }
+
+    /**
+     * Check is entity exists for project
+     *
+     * @param string $name
+     * @param int $project_id
+     * @param int|null $except_id
+     * @return bool
+     */
+    public function isEntityExists(string $name, int $project_id, int $except_id = null): bool
+    {
+        $filters = [
+            ['name', $name],
+            ['project_id', $project_id]
+        ];
+
+        if ($except_id) {
+            $filters[] = [
+                'id',
+                '<>',
+                $except_id
+            ];
+        }
+
+        return (bool)(
+            $this->getRepository()->getFirstByFilters(
+                $filters
+            )
+        );
+    }
 }
