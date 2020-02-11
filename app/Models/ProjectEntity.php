@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int $id
  * @property int $project_id
  * @property string $name
+ * @property string $description
  */
 class ProjectEntity extends Model
 {

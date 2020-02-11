@@ -30,6 +30,8 @@ Route::prefix('core')->group(function() {
                 Route::prefix('{project}/entities')->group(function(){
                     Route::post('', 'Core\Account\ProjectEntitiesController@create')
                         ->name('core.account.project-entities.create');
+                    Route::get('', 'Core\Account\ProjectEntitiesController@index')
+                        ->name('core.account.project-entities.index');
                 });
             });
         });

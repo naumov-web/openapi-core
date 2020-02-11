@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\ListItemsDTO;
 use App\Models\Project;
 use App\Repositories\AbstractRepository;
 use App\Repositories\ProjectEntitiesRepository;
@@ -35,6 +36,27 @@ class ProjectEntitiesService extends AbstractEntityService
     protected function getRepository(): AbstractRepository
     {
         return $this->repository;
+    }
+
+    /**
+     * Get project entities list
+     *
+     * @param Project $project
+     * @param array $data
+     * @return ListItemsDTO
+     */
+    public function list(Project $project, array $data): ListItemsDTO
+    {
+        return $this->indexModels(
+            array_merge(
+                $data,
+                [
+                    'filters' => [
+                        ['project_id', $project->id],
+                    ]
+                ]
+            )
+        );
     }
 
     /**
