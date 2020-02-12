@@ -58,4 +58,21 @@ abstract class AbstractProjectEntityTest extends BaseAccountTest
             $this->json('POST', route('core.account.projects.create'), $test_project);
         }
     }
+
+    /**
+     * Create test items
+     * 
+     * @param int $project_id
+     * @return void
+     */
+    protected function createTestItems(int $project_id): void
+    {
+        foreach ($this->test_items as $test_item) {
+            $this->json(
+                'POST',
+                route('core.account.project-entities.create', ['project' => $project_id]),
+                $test_item
+            );
+        }
+    }
 }
