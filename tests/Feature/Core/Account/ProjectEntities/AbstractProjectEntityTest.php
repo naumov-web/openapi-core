@@ -30,11 +30,29 @@ abstract class AbstractProjectEntityTest extends BaseAccountTest
     ];
 
     /**
+     * Test items
+     * @var array
+     */
+    protected $test_items = [
+        [
+            'name' => 'entity_0'
+        ],
+        [
+            'name' => 'entity_1',
+            'description' => 'Описание 1'
+        ],
+        [
+            'name' => 'entity_2',
+            'description' => 'Описание 2'
+        ],
+    ];
+
+    /**
      * Create test items
      *
      * @return void
      */
-    protected function createTestItems(): void
+    protected function createTestProjects(): void
     {
         foreach ($this->test_projects as $test_project) {
             $this->json('POST', route('core.account.projects.create'), $test_project);
