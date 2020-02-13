@@ -66,5 +66,67 @@ class GetProjectEntitiesTest extends AbstractProjectEntityTest
 
         $project = Project::where('name', $this->test_projects[0]['name'])->first();
         $this->createTestItems($project->id);
+
+        // Case 1
+        $request_params = [
+            'limit' => 2,
+            'offset' => 0,
+            'project' => $project->id,
+        ];
+        $this->json('GET', route('core.account.project-entities.index', $request_params))
+            ->assertOk()
+            ->assertJson([
+                'count' => count($this->test_items),
+                'items' => [
+                    $this->test_items[0],
+                    $this->test_items[1],
+                ]
+            ]);
+
+        // Case 2
+        $request_params['offset'] = 2;
+        $this->json('GET', route('core.account.project-entities.index', $request_params))
+            ->assertOk()
+            ->assertJson([
+                'count' => count($this->test_items),
+                'items' => [
+                    $this->test_items[2],
+                ]
+            ]);
+
+        // Case 3
+        $request_params['sort_by'] = 'name';
+        $request_params['sort_direction'] = 'desc';
+        $this->json('GET', route('core.account.project-entities.index', $request_params))
+            ->assertOk()
+            ->assertJson([
+                'count' => count($this->test_items),
+                'items' => [
+                    $this->test_items[0],
+                ]
+            ]);
+
+        // Case 4
+        $request_params['sort_direction'] = 'asc';
+        $this->json('GET', route('core.account.project-entities.index', $request_params))
+            ->assertOk()
+            ->assertJson([
+                'count' => count($this->test_items),
+                'items' => [
+                    $this->test_items[2],
+                ]
+            ]);
+
+        // Case 5
+        $request_params['offset'] = 0;
+        $this->json('GET', route('core.account.project-entities.index', $request_params))
+            ->assertOk()
+            ->assertJson([
+                'count' => count($this->test_items),
+                'items' => [
+                    $this->test_items[0],
+                    $this->test_items[1],
+                ]
+            ]);
     }
 }
