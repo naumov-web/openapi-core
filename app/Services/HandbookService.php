@@ -18,6 +18,7 @@ class HandbookService extends AbstractService
     {
         return [
             'formats' => $this->getFormats(),
+            'field_types' => $this->getFieldTypes(),
         ];
     }
 
@@ -29,6 +30,16 @@ class HandbookService extends AbstractService
     public function getFormats(): array
     {
         return config('handbooks.formats');
+    }
+
+    /**
+     * Get field types
+     *
+     * @return array
+     */
+    public function getFieldTypes(): array
+    {
+        return config('handbooks.field_types');
     }
 
 }

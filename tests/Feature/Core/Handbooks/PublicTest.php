@@ -21,7 +21,8 @@ class PublicTest extends BaseFeatureTest
         $this->json('GET', route('core.handbooks.public.all.show'))
             ->assertOk()
             ->assertJson([
-                'formats' => config('handbooks.formats')
+                'formats' => config('handbooks.formats'),
+                'field_types' => config('handbooks.field_types')
             ]);
     }
 }
