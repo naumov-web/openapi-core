@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Core\Account\ProjectEntities;
 
 use App\Http\Requests\Core\Account\BaseAccountRequest;
+use App\Rules\EntityFieldNameUnique;
 use App\Rules\EntityNameUniqueForProject;
 
 /**
@@ -22,7 +23,11 @@ class CreateProjectEntityRequest extends BaseAccountRequest
 
         return [
             'name' => ['required', 'string', new EntityNameUniqueForProject($project->id)],
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'fields' => ['required', 'array', new EntityFieldNameUnique()],
+            'fields.*.name' => ['required', 'string'],
+            'fields.*.type_id' => ['required', 'integer'],
+            'fields.*.is_nullable' => ['required', 'boolean'],
         ];
     }
 }

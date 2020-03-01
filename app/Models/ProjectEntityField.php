@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read int $id
  * @property string $name
+ * @property string $description
+ * @property string $default_value
  * @property int $type_id
  * @property int $project_entity_id
  * @property bool $is_nullable
