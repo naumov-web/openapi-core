@@ -28,6 +28,8 @@ class CreateProjectEntityRequest extends BaseAccountRequest
             'fields.*.name' => ['required', 'string'],
             'fields.*.type_id' => ['required', 'integer'],
             'fields.*.is_nullable' => ['required', 'boolean'],
+            'fields.*.description' => ['nullable', 'string'],
+            'fields.*.default_value' => ['nullable', 'string'],
         ];
     }
 }

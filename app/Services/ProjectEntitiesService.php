@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\DTO\ListItemsDTO;
 use App\Models\Project;
+use App\Models\ProjectEntity;
 use App\Repositories\AbstractRepository;
 use App\Repositories\ProjectEntitiesRepository;
+use App\Repositories\ProjectEntityFieldsRepository;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,12 +24,21 @@ class ProjectEntitiesService extends AbstractEntityService
     protected $repository;
 
     /**
+     * Project entity fields service instance
+     * @var ProjectEntityFieldsService
+     */
+    protected $project_entity_fields_service;
+
+    /**
      * ProjectEntitiesService constructor.
      * @param ProjectEntitiesRepository $repository
      */
     public function __construct(ProjectEntitiesRepository $repository)
     {
         $this->repository = $repository;
+        $this->project_entity_fields_service = new ProjectEntityFieldsService(
+            new ProjectEntityFieldsRepository()
+        );
     }
 
     /**
@@ -64,11 +75,14 @@ class ProjectEntitiesService extends AbstractEntityService
      *
      * @param Project $project
      * @param array $data
-     * @return Model
+     * @return ProjectEntity
      */
-    public function create(Project $project, array $data): Model
+    public function create(Project $project, array $data): ProjectEntity
     {
-        return $this->storeModel(
+        /**
+         * @var ProjectEntity $entity
+         */
+        $entity = $this->storeModel(
             array_merge(
                 [
                     'project_id' => $project->id,
@@ -76,6 +90,15 @@ class ProjectEntitiesService extends AbstractEntityService
                 $data
             )
         );
+
+        if (isset($data['fields'])) {
+            $this->project_entity_fields_service->createMultiple(
+                $entity,
+                $data['fields']
+            );
+        }
+
+        return $entity;
     }
 
     /**
